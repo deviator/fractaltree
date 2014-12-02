@@ -1,0 +1,15 @@
+{
+    "name": "ftree",
+    "targetPath": "bin",
+    "targetType": "executable",
+    "importPaths": [ "des/import", "descore/import" ],
+    "sourcePaths": [ "src", "des/import", "descore/import" ],
+    "stringImportPaths": [ "src/ext" ],
+    "dependencies":
+    {
+        "derelict-gl3": ">=1.0.10",
+        "derelict-sdl2": ">=1.2.8",
+        "derelict-ft": ">=1.0.0",
+        "dyaml": ">=0.5.0",
+    }
+}

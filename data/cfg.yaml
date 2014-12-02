@@ -1,0 +1,11 @@
+draw:
+    window:
+        title: 'FracTree'
+        #size: [ 1920, 1080 ]
+        size: [ 960, 540 ]
+        fullscreen: false
+
+    scene:
+
+sock:
+    file: '/tmp/ftree.sock'
