@@ -4,3 +4,6 @@
 [submodule "des"]
 	path = des
 	url = git@github.com:dexset/des.git
+[submodule "mobctrl"]
+	path = mobctrl
+	url = git@github.com:deviator/mobctrl.git
