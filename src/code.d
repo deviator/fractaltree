@@ -8,5 +8,6 @@ enum SigCode : ulong
 
 enum EvCode : ulong
 {
-    SETTING
+    SETTING,
+    MCLIENT
 }

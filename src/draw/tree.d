@@ -34,6 +34,7 @@ struct TimeMeasure
 class Tree : ExternalMemoryManager
 {
     mixin ParentEMM;
+    mixin AnywayLogger;
 protected:
 
     DrawNode master;
@@ -53,9 +54,13 @@ public:
     void idle( float dt )
     {
         k+=dt;
-        master.rotate( deltaAngle(dt) );
+        logger.trace( orient, rotcoef );
+        master.rotate( orient, rotcoef );
         log_trace( meas.avg );
     }
+
+    vec3 orient = vec3(0,0,0);
+    float rotcoef = 1;
 
     void draw( Camera cam )
     {
@@ -66,8 +71,4 @@ public:
 
 protected:
 
-    @property vec2 deltaAngle( float dt )
-    {
-        return vec2( sin( k * 0.05 ), cos( k * 0.1 ) );
-    }
 }

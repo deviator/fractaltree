@@ -12,6 +12,7 @@ import des.util.logger;
 
 import yamlset;
 import code;
+import client;
 
 import draw.scene;
 
@@ -83,9 +84,13 @@ public:
         {
             case EvCode.SETTING:
                 auto set = loadYAML( ev.pdata );
-                //if( set.containsKey("scene") )
-                //    scene.setSettings( set["scene"] );
+                if( set.containsKey("scene") )
+                    scene.setSettings( set["scene"] );
                 break;
+            case EvCode.MCLIENT:
+                scene.updateClients( [ev.data.as!MClient] );
+                break;
+
             case FEvent.system_code:
                 if( scene is null ) break;
                 auto sysev = ev.as!SysEvData;

@@ -9,3 +9,4 @@ draw:
 
 sock:
     file: '/tmp/ftree.sock'
+    maxbuflen: 2048

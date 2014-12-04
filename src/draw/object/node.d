@@ -51,11 +51,11 @@ public:
         drawSelf( cam.resolve(this.spaceParent), cam );
     }
 
-    void rotate( vec2 rot )
+    void rotate( vec3 rot, float k )
     {
         rotateSelf( rot );
-        foreach( i; 0 .. child.length )
-            child[i].rotate( rot * calcChildRotCoef(i) );
+        foreach( i, ch; child )
+            ch.rotate( rot*k, k );
     }
 
 protected:
@@ -89,11 +89,12 @@ protected:
         return vec2(1,1);// / (i*0.5+1);
     }
 
-    void rotateSelf( vec2 drot )
+    void rotateSelf( vec3 drot )
     {
-        auto q0 = quat.fromAngle( drot.x * 0, vec3(0,1,0) );
+        auto q0 = quat.fromAngle( drot.x, vec3(0,1,0) );
         auto q1 = quat.fromAngle( drot.y, vec3(0,0,1) );
-        auto nm = quatAndPosToMatrix( q0.quatMlt(q1), vec3(0,0,0) );
+        auto q2 = quat.fromAngle( drot.z * 0, vec3(1,0,0) );
+        auto nm = quatAndPosToMatrix( q0.quatMlt(q1).quatMlt(q2), vec3(0,0,0) );
         self_mtr = initmtr * nm;
     }
 
