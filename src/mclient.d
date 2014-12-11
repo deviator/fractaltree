@@ -10,4 +10,6 @@ struct MClient
     vec3 motion;
 
     float p1;
+
+    vec2 pos;
 }
