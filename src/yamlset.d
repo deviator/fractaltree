@@ -8,7 +8,7 @@ import std.typetuple;
 import std.traits;
 
 import des.math.linear;
-import des.util.logger;
+import des.util.logsys;
 
 alias yaml.Node YAMLNode;
 
@@ -67,7 +67,7 @@ auto tryYAML(T=YAMLNode,K,string moduleName=__MODULE__,size_t line=__LINE__)( YA
         else return convYAML!T( node[key] );
     }
     catch( Exception e )
-        log_warn!(__MODULE__ ~ ".tryYAML")( "unable to get <%s> from YAML by key '%s' at %s:%d because: %s",
+        logger.warn!(__MODULE__ ~ ".tryYAML")( "unable to get <%s> from YAML by key '%s' at %s:%d because: %s",
                 typeid(T), key, moduleName, line, e.msg );
 
     return default_value;

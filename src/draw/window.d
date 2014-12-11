@@ -8,7 +8,7 @@ alias des.flow.SignalBus SignalBus;
 
 import des.app;
 import des.util.algo;
-import des.util.logger;
+import des.util.logsys;
 
 import yamlset;
 import code;

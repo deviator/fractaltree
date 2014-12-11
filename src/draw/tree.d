@@ -34,7 +34,7 @@ struct TimeMeasure
 class Tree : ExternalMemoryManager
 {
     mixin ParentEMM;
-    mixin AnywayLogger;
+    mixin ClassLogger;
 protected:
 
     DrawNode master;
@@ -56,7 +56,7 @@ public:
         k+=dt;
         logger.trace( orient, rotcoef );
         master.rotate( orient, rotcoef );
-        log_trace( meas.avg );
+        logger.trace( meas.avg );
     }
 
     vec3 orient = vec3(0,0,0);

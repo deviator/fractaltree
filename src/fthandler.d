@@ -2,7 +2,7 @@ module fthandler;
 
 import des.flow;
 import des.util.emm;
-import des.util.logger;
+import des.util.logsys;
 import code;
 import yamlset;
 
@@ -38,7 +38,7 @@ class FTHandler: ExternalMemoryManager
             }
             if( th.info.error != FThread.Error.NONE )
             {
-                log_error( "'%s' has error [%s] at time [%016.9f] : %s",
+                logger.error( "'%s' has error [%s] at time [%016.9f] : %s",
                         th.name, th.info.error, th.info.timestamp / 1e9f,
                         th.info.message );
                 pushCommand( Command.CLOSE );

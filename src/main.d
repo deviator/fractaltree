@@ -4,7 +4,7 @@ import core.thread;
 
 import des.flow;
 import des.util.emm;
-import des.util.logger;
+import des.util.logsys;
 import des.util.helpers;
 
 import yamlset;
@@ -36,13 +36,13 @@ void main()
     auto cfg_fn = appPath( "..", "data", "cfg.yaml" );
     auto sys = new FTHandler( cfg_fn, prepare( cfg_fn ) );
 
-    log_info( "app start" );
+    logger.info( "app start" );
 
     sys.pushCommand( Command.START );
     while( sys.check )
         Thread.sleep(dur!"msecs"(100));
 
-    log_info( "app finish" );
+    logger.info( "app finish" );
 
     scope(exit)
     {

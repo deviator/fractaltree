@@ -3,7 +3,7 @@ module sock.we;
 import std.file;
 
 import des.flow;
-import des.util.logger;
+import des.util.logsys;
 
 import std.socket;
 import std.socketstream;
