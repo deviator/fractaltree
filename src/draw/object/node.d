@@ -90,7 +90,7 @@ protected:
 
     mat4 calcChildTr2()
     {
-        auto q = quat.fromAngle( PI / 2.0, vec3(0,0,1) );
+        auto q = quat.fromAngle( 0.01, vec3(0,1,0) );
         auto nm = quatAndPosToMatrix( q, vec3(0,0,0) );
         return nm;
     }

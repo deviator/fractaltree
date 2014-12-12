@@ -1,7 +1,7 @@
 module draw.we;
 
 import des.flow;
-import des.util.logger;
+import des.util.logsys;
 import des.app;
 
 import yamlset;
