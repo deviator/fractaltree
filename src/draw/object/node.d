@@ -103,7 +103,7 @@ protected:
     void drawSelf( mat4 par_mtr, Camera cam )
     {
         cached_matrix = par_mtr * matrix;
-        shader.setUniformMat( "prj", cam.projection.matrix * cached_matrix );
+        shader.setUniform!mat4( "prj", cam.projection.matrix * cached_matrix );
         drawArrays( DrawMode.LINE_STRIP );
 
         foreach( ch; child )

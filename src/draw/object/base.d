@@ -19,7 +19,8 @@ public:
 
     this()
     {
-        super( loadShaderSource( appPath( "..", "data", "shaders", "object.glsl" ) ) );
+        import std.file;
+        super( readText( appPath( "..", "data", "shaders", "object.glsl" ) ) );
 
         prepareBuffers();
     }
