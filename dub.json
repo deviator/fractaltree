@@ -4,7 +4,7 @@
     "targetType": "executable",
     "importPaths": [ "des/import", "descore/import" ],
     "sourcePaths": [ "src", "des/import", "descore/import" ],
-    "stringImportPaths": [ "src/ext" ],
+    "stringImportPaths": [ "data" ],
     "dependencies":
     {
         "derelict-gl3": ">=1.0.10",

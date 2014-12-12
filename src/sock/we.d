@@ -3,6 +3,7 @@ module sock.we;
 import std.file;
 
 import des.flow;
+import des.util.colorparse;
 import des.util.logsys;
 
 import std.socket;
@@ -107,6 +108,11 @@ protected:
             cur_cli.motion[2] = to!float(jd["motion"][2].str);
 
             cur_cli.p1 = to!float(jd["slider"].str);
+
+            float x = to!float( jd["posx"].str );
+            float y = to!float( jd["posy"].str );
+
+            cur_cli.pos = vec2( x, y );
         }
         catch( Exception e )
         {

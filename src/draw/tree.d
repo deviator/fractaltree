@@ -62,9 +62,14 @@ public:
     vec3 orient = vec3(0,0,0);
     float rotcoef = 1;
 
+    void setColors( col4 c1, col4 c2 )
+    { master.setColors( c1, c2 ); }
+
     void draw( Camera cam )
     {
         tm.reset();
+
+        master.draw( cam );
         master.draw( cam );
         meas.append( tm.cycle() );
     }

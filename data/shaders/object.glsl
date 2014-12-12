@@ -2,25 +2,48 @@
 #version 330
 
 in vec4 pos;
-in vec4 col;
 
 uniform mat4 prj;
 
-out vec4 v_col;
+void main()
+{ gl_Position = prj * pos; }
+
+//### geom
+#version 330
+
+layout( triangles ) in;
+//layout( line_strip, max_vertices = 2 ) out;
+layout( triangle_strip, max_vertices = 3 ) out;
+
+uniform vec4 col1;
+uniform vec4 col2;
+
+out vec4 ex_col;
 
 void main()
 {
-    gl_Position = prj * pos;
-    v_col = col;
+    gl_Position = gl_in[0].gl_Position;
+    ex_col = col1;
+    EmitVertex();
+
+    gl_Position = gl_in[1].gl_Position;
+    ex_col = col2;
+    EmitVertex();
+
+    gl_Position = gl_in[2].gl_Position;
+    ex_col = col1;
+    EmitVertex();
+    EndPrimitive();
 }
+
 
 //### frag
 #version 330
 
-in vec4 v_col;
+in vec4 ex_col;
 out vec4 color;
 
 void main()
 {
-    color = v_col;
+    color = ex_col;
 }

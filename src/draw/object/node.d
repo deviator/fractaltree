@@ -7,19 +7,20 @@ import std.random;
 class DrawNode : DrawObject
 {
 protected:
+    col4 scol1 = col4(1);
+    col4 scol2 = col4(1);
+
+    bool color_changed = true;
 
     float seg_len = 2;
 
     override void prepareBuffers()
     {
-        auto loc = shader.getAttribLocations( "pos", "col" );
+        auto loc = shader.getAttribLocations( "pos" );
         pos = createArrayBuffer;
-        col = createArrayBuffer;
         setAttribPointer( pos, loc[0], 3, GLType.FLOAT );
-        setAttribPointer( col, loc[1], 4, GLType.FLOAT );
 
         pos.setData( [ vec3(0,0,0), vec3(seg_len*0.381,.1,0), vec3(seg_len,0,0) ] );
-        col.setData( [ col4(1,1,0,1), col4(1,0,0,1), col4(1,1,0,1) ] );
 
         glLineWidth(2);
     }
@@ -43,7 +44,7 @@ public:
 
         child ~= newEMM!DrawNode( this, calcChildTr0, count - 1 );
         child ~= newEMM!DrawNode( this, calcChildTr1, count - 1 );
-        //child ~= newEMM!DrawNode( this, calcChildTr2, count - 1 );
+        child ~= newEMM!DrawNode( this, calcChildTr2, count - 1 );
     }
 
     void draw( Camera cam )
@@ -58,10 +59,20 @@ public:
             ch.rotate( rot*k, k );
     }
 
-protected:
+    void setColors( col4 c1, col4 c2 )
+    {
+        if( c1 == scol1 && c2 == scol2 )
+            return;
 
-    mat4 calcChildTr( size_t i )
-    { return mat4.diag(0.7).setCol(3,vec4(seg_len,0,0,1)); }
+        scol1 = c1;
+        scol2 = c2;
+
+        color_changed = true;
+        foreach( ref ch; child )
+            ch.setColors( c1, c2 );
+    }
+
+protected:
 
     mat4 calcChildTr0()
     {
@@ -79,9 +90,9 @@ protected:
 
     mat4 calcChildTr2()
     {
-        auto q = quat.fromAngle( -0.1, vec3(0,0,1) );
+        auto q = quat.fromAngle( 0.01, vec3(0,1,0) );
         auto nm = quatAndPosToMatrix( q, vec3(0,0,0) );
-        return mat4.diag(0.9*0.381).setCol(3,vec4(seg_len * 0.618,-.05,0,1)) * nm;
+        return nm;
     }
 
     vec2 calcChildRotCoef( size_t i )
@@ -94,7 +105,7 @@ protected:
         auto q0 = quat.fromAngle( drot.x, vec3(0,1,0) );
         auto q1 = quat.fromAngle( drot.y, vec3(0,0,1) );
         auto q2 = quat.fromAngle( drot.z * 0, vec3(1,0,0) );
-        auto nm = quatAndPosToMatrix( q0.quatMlt(q1).quatMlt(q2), vec3(0,0,0) );
+        auto nm = quatAndPosToMatrix( q0 * q1 * q2, vec3(0,0,0) );
         self_mtr = initmtr * nm;
     }
 
@@ -102,9 +113,16 @@ protected:
 
     void drawSelf( mat4 par_mtr, Camera cam )
     {
+        if( color_changed )
+        {
+            shader.setUniform!col4("col1", scol1);
+            shader.setUniform!col4("col2", scol2);
+            color_changed = false;
+        }
+
         cached_matrix = par_mtr * matrix;
         shader.setUniform!mat4( "prj", cam.projection.matrix * cached_matrix );
-        drawArrays( DrawMode.LINE_STRIP );
+        drawArrays( DrawMode.TRIANGLES );
 
         foreach( ch; child )
             ch.drawSelf( cached_matrix, cam );
