@@ -1,7 +1,7 @@
 module fthandler;
 
 import des.flow;
-import des.util.emm;
+import des.util.object.emm;
 import des.util.logsys;
 import code;
 import yamlset;

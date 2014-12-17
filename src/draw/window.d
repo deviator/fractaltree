@@ -7,7 +7,7 @@ alias des.flow.SysEvData SysEvData;
 alias des.flow.SignalBus SignalBus;
 
 import des.app;
-import des.util.algo;
+import des.util.stdext.algorithm;
 import des.util.logsys;
 
 import yamlset;
@@ -20,7 +20,7 @@ class UsableWindow : GLWindow
 {
 protected:
 
-    KeyboardEventProcessor keyproc;
+    //KeyboardEventProcessor keyproc;
     WindowEventProcessor   winproc;
     MouseEventProcessor    mouseproc;
 
@@ -28,7 +28,7 @@ public:
     this( string title, ivec2 sz, bool fullscreen = false )
     {
         super( title, sz, fullscreen );
-        keyproc   = addEventProcessor( new KeyboardEventProcessor );
+        //keyproc   = addEventProcessor( new KeyboardEventProcessor );
         winproc   = addEventProcessor( new WindowEventProcessor );
         mouseproc = addEventProcessor( new MouseEventProcessor );
     }
@@ -48,11 +48,11 @@ protected:
     {
         scene = newEMM!Scene;
 
-        idle.connect( &(scene.idle) );
-        draw.connect( &(scene.draw) );
-        keyproc.key.connect( &(scene.keyControl) );
-        mouseproc.mouse.connect( &(scene.mouseControl) );
-        winproc.resized.connect( &(scene.resize) );
+        connect( idle, &(scene.idle) );
+        connect( draw, &(scene.draw) );
+        //connect( keyproc.key, &(scene.keyControl) );
+        connect( mouseproc.mouse, &(scene.mouseControl) );
+        connect( winproc.resized, &(scene.resize) );
     }
 
 public:
