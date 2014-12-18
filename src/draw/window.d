@@ -16,25 +16,7 @@ import client;
 
 import draw.scene;
 
-class UsableWindow : GLWindow
-{
-protected:
-
-    //KeyboardEventProcessor keyproc;
-    WindowEventProcessor   winproc;
-    MouseEventProcessor    mouseproc;
-
-public:
-    this( string title, ivec2 sz, bool fullscreen = false )
-    {
-        super( title, sz, fullscreen );
-        //keyproc   = addEventProcessor( new KeyboardEventProcessor );
-        winproc   = addEventProcessor( new WindowEventProcessor );
-        mouseproc = addEventProcessor( new MouseEventProcessor );
-    }
-}
-
-class MainWindow : UsableWindow, des.flow.EventProcessor
+class MainWindow : GLWindow, des.flow.EventProcessor
 {
 private:
     Scene scene;
@@ -50,9 +32,9 @@ protected:
 
         connect( idle, &(scene.idle) );
         connect( draw, &(scene.draw) );
-        //connect( keyproc.key, &(scene.keyControl) );
-        connect( mouseproc.mouse, &(scene.mouseControl) );
-        connect( winproc.resized, &(scene.resize) );
+        //connect( key, &(scene.keyControl) );
+        connect( mouse, &(scene.mouseControl) );
+        connect( resized, &(scene.resize) );
     }
 
 public:

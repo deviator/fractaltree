@@ -33,7 +33,7 @@ struct TimeMeasure
 
 class Tree : ExternalMemoryManager
 {
-    mixin ParentEMM;
+    mixin EMM;
     mixin ClassLogger;
 protected:
 

@@ -53,10 +53,7 @@ public:
 
 protected:
 
-    void selfDestroy()
-    {
-        stopSock();
-    }
+    override void selfDestroy() { stopSock(); }
 
     void stopSock()
     {

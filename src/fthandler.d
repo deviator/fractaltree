@@ -1,14 +1,14 @@
 module fthandler;
 
 import des.flow;
-import des.util.object.emm;
+import des.util.arch.emm;
 import des.util.logsys;
 import code;
 import yamlset;
 
 class FTHandler: ExternalMemoryManager
 {
-    mixin ParentEMM;
+    mixin EMM;
 
     string config_file_name;
     FThread[] list;

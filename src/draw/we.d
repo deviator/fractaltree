@@ -40,6 +40,6 @@ class DrawWE : WorkElement
     }
 
     override des.flow.EventProcessor[] getEventProcessors() { return [win]; }
-    protected void selfDestroy() { logger.info( "pass" ); }
+    protected override void selfDestroy() { logger.info( "pass" ); }
 }
 

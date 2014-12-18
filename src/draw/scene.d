@@ -14,7 +14,7 @@ import std.math;
 
 class Scene : ExternalMemoryManager
 {
-    mixin ParentEMM;
+    mixin EMM;
 
 protected:
 
