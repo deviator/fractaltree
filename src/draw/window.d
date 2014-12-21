@@ -32,7 +32,7 @@ protected:
 
         connect( idle, &(scene.idle) );
         connect( draw, &(scene.draw) );
-        //connect( key, &(scene.keyControl) );
+        connect( key, &(scene.keyControl) );
         connect( mouse, &(scene.mouseControl) );
         connect( resized, &(scene.resize) );
     }

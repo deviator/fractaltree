@@ -70,7 +70,6 @@ public:
         tm.reset();
 
         master.draw( cam );
-        master.draw( cam );
         meas.append( tm.cycle() );
     }
 

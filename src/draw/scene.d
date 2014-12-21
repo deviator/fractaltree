@@ -6,6 +6,7 @@ import des.gl;
 import des.app.event;
 
 import draw.tree;
+import draw.object.sphere;
 import draw.camera;
 
 import client;
@@ -21,7 +22,8 @@ protected:
     MCamera cam;
     Timer tm;
 
-    Tree tree;
+    //Tree tree;
+    Sphere sphere;
 
 public:
     this()
@@ -29,18 +31,21 @@ public:
         tm = new Timer;
         cam = new MCamera;
 
-        tree = newEMM!Tree;
+        //tree = newEMM!Tree;
+        sphere = newEMM!Sphere( 5, 24, 12 );
     }
 
     void idle()
     {
         float dt = tm.cycle();
-        tree.idle( dt );
+        //tree.idle( dt );
+        logger.trace( "pass" );
     }
 
     void draw()
     {
-        tree.draw( cam );
+        //tree.draw( cam );
+        sphere.draw( cam );
     }
 
     void keyControl( in KeyboardEvent ke )
@@ -64,6 +69,7 @@ public:
 
     void updateClients( MClient[] clis )
     {
+        /+
         if( clis.length > 0 )
         {
             tree.orient = clis[0].orient / 180.0 * PI;
@@ -116,5 +122,6 @@ public:
             
             tree.setColors( color, col4( 1,0,0,1 ) );
         }
+        +/
     }
 }

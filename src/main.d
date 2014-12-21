@@ -25,10 +25,11 @@ FThread[] prepare( string cfg_fn )
     auto sock_set = dumpYAML( root["sock"] );
 
     auto draw = new FThread( "draw", &(createWE!DrawWE), draw_set );
-    auto sock = new FThread( "sock", &(createWE!SockWE), sock_set );
+    //auto sock = new FThread( "sock", &(createWE!SockWE), sock_set );
 
-    sock.addListener( draw );
-    return [ draw, sock ];
+    //sock.addListener( draw );
+    //return [ draw, sock ];
+    return [ draw ];
 }
 
 void main()
