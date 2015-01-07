@@ -2,7 +2,7 @@ module draw.tree;
 
 import des.util;
 import des.gl;
-import des.view;
+import des.space;
 import std.math;
 
 import draw.object;

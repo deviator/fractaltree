@@ -2,7 +2,7 @@ module draw.object.base;
 
 public import std.math;
 public import des.util;
-public import des.view;
+public import des.space;
 public import des.gl;
 
 class DrawObject : GLSimpleObject, SpaceNode

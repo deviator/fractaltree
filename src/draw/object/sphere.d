@@ -8,8 +8,8 @@ vec2[] planeCoord( uivec2 res, vec2 x_size=vec2(0,1), vec2 y_size=vec2(0,1) )
 {
     vec2[] ret;
 
-    float sx = (x_size[1] - x_size[0]) / res.x;
-    float sy = (y_size[1] - y_size[0]) / res.y;
+    float sx = (x_size[1] - x_size[0]) / res.u;
+    float sy = (y_size[1] - y_size[0]) / res.v;
 
     foreach( y; 0 .. res.y+1 )
         foreach( x; 0 .. res.x+1 )
