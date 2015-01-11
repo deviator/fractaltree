@@ -11,7 +11,7 @@ import draw.window;
 
 class DrawWE : WorkElement
 {
-    GLApp app;
+    DesApp app;
     MainWindow win;
     bool quitsig = false;
 
@@ -19,7 +19,7 @@ class DrawWE : WorkElement
     {
         logger = new InstanceLogger( this );
 
-        app = newEMM!GLApp;
+        app = newEMM!DesApp;
         app.addWindow({ return win = new MainWindow(this,set); });
     }
 

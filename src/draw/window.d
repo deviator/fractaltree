@@ -16,7 +16,7 @@ import client;
 
 import draw.scene;
 
-class MainWindow : GLWindow, des.flow.EventProcessor
+class MainWindow : DesWindow, des.flow.EventProcessor
 {
 private:
     Scene scene;
@@ -34,7 +34,7 @@ protected:
         connect( draw, &(scene.draw) );
         connect( key, &(scene.keyControl) );
         connect( mouse, &(scene.mouseControl) );
-        connect( resized, &(scene.resize) );
+        connect( event.resized, &(scene.resize) );
     }
 
 public:
