@@ -62,7 +62,7 @@ protected:
 
     void axisReaction( uint joy, uint axis, short value )
     {
-        std.stdio.writefln( "joy [%d] change axis [%d]: [%d]", joy, axis, value );
+        std.stdio.writefln( "joy [%s] change axis [%d]: [%d]", joyev.devlist[joy].name, axis, value );
     }
 
 public:
