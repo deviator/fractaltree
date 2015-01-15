@@ -18,6 +18,7 @@ import draw.scene;
 
 class MainWindow : DesWindow, des.flow.EventProcessor
 {
+    mixin DES;
 private:
     Scene scene;
 
@@ -26,15 +27,42 @@ protected:
     YAMLNode setting;
     SignalBus sigbus;
 
+    TextEventProcessor text;
+    JoyEventProcessor joyev;
+
     override void prepare()
     {
         scene = newEMM!Scene;
+        logger.Debug( "pass scene creation" );
+
+        text = newEvProc!TextEventProcessor;
+        connect( text.input, &textProcess );
+
+        joyev = newEvProc!JoyEventProcessor;
+        connect( joyev.axisChange, &axisReaction );
 
         connect( idle, &(scene.idle) );
         connect( draw, &(scene.draw) );
         connect( key, &(scene.keyControl) );
+        connect( key, &keyControl );
         connect( mouse, &(scene.mouseControl) );
         connect( event.resized, &(scene.resize) );
+    }
+
+    void keyControl( in KeyboardEvent ke )
+    {
+        if( ke.scan == ke.Scan.I )
+            startTextInput();
+        else if( ke.scan == ke.Scan.ESCAPE )
+            stopTextInput();
+    }
+
+    void textProcess( dstring str )
+    { std.stdio.stdout.writeln( "input: ", str ); }
+
+    void axisReaction( uint joy, uint axis, short value )
+    {
+        std.stdio.writefln( "joy [%d] change axis [%d]: [%d]", joy, axis, value );
     }
 
 public:
@@ -52,7 +80,7 @@ public:
             auto fs = tryYAML!bool( ws, "fullscreen", false );
             super( title, sz, fs );
         }
-        else super( "nsdr", ivec2(800,600), false );
+        else super( "fractaltree", ivec2(800,600), false );
 
         if( set.containsKey("scene") )
             this.setting = set["scene"];

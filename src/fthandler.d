@@ -16,7 +16,7 @@ class FTHandler: ExternalMemoryManager
     this( string fn, FThread[] list )
     {
         config_file_name = fn;
-        this.list = registerChildsEMM(list);
+        this.list = registerChildEMM(list);
     }
 
     @property bool check()
