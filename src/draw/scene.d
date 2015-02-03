@@ -22,8 +22,8 @@ protected:
     MCamera cam;
     Timer tm;
 
-    //Tree tree;
-    Sphere sphere;
+    Tree tree;
+    //Sphere sphere;
 
 public:
     this()
@@ -31,21 +31,21 @@ public:
         tm = new Timer;
         cam = new MCamera;
 
-        //tree = newEMM!Tree;
-        sphere = newEMM!Sphere( 5, 24, 12 );
+        tree = newEMM!Tree;
+        //sphere = newEMM!Sphere( 5, 24, 12 );
     }
 
     void idle()
     {
         float dt = tm.cycle();
-        //tree.idle( dt );
+        tree.idle( dt );
         logger.trace( "pass" );
     }
 
     void draw()
     {
-        //tree.draw( cam );
-        sphere.draw( cam );
+        tree.draw( cam );
+        //sphere.draw( cam );
     }
 
     void keyControl( in KeyboardEvent ke )
@@ -69,7 +69,6 @@ public:
 
     void updateClients( MClient[] clis )
     {
-        /+
         if( clis.length > 0 )
         {
             tree.orient = clis[0].orient / 180.0 * PI;
@@ -89,7 +88,7 @@ public:
                 return;
             }
 
-            col4 color;
+            vec4 color;
             color.a = 1.0;
 
             float fangle, sangle;
@@ -120,8 +119,7 @@ public:
                 color.r = sangle;
             }
             
-            tree.setColors( color, col4( 1,0,0,1 ) );
+            tree.setColors( color, vec4( 1,0,0,1 ) );
         }
-        +/
     }
 }

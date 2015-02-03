@@ -72,8 +72,8 @@ public:
         resU = u;
         resV = v;
         import std.file;
-        super( newEMM!CommonShaderProgram(
-                parseShaderSource(
+        super( newEMM!CommonGLShaderProgram(
+                parseGLShaderSource(
                     readText(
                         appPath( "..", "data", "shaders", "object.glsl" )
                     ))));
@@ -82,7 +82,7 @@ public:
 
     void draw( Camera cam )
     {
-        shader.setUniform!col4("col", col4(1,0,0,1));
+        shader.setUniform!vec4("col", vec4(1,0,0,1));
         glEnable( GL_PRIMITIVE_RESTART );
         glPrimitiveRestartIndex(uint.max);
         glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );

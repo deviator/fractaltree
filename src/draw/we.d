@@ -27,7 +27,7 @@ class DrawWE : WorkElement
     {
         if( quitsig ) return;
 
-        if( app.isRuning && app.step() )
+        if( app.isRunning && app.step() )
             logger.trace( "app work" );
         else quit();
     }

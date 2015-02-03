@@ -20,8 +20,8 @@ public:
     this()
     {
         import std.file;
-        super( newEMM!CommonShaderProgram(
-                parseShaderSource(
+        super( newEMM!CommonGLShaderProgram(
+                parseGLShaderSource(
                     readText(
                         appPath( "..", "data", "shaders", "object.glsl" )
                     ))));

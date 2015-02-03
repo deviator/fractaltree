@@ -7,8 +7,8 @@ import std.random;
 class DrawNode : DrawObject
 {
 protected:
-    col4 scol1 = col4(1);
-    col4 scol2 = col4(1);
+    vec4 scol1 = vec4(1);
+    vec4 scol2 = vec4(1);
 
     bool color_changed = true;
 
@@ -59,7 +59,7 @@ public:
             ch.rotate( rot*k, k );
     }
 
-    void setColors( col4 c1, col4 c2 )
+    void setColors( vec4 c1, vec4 c2 )
     {
         if( c1 == scol1 && c2 == scol2 )
             return;
@@ -115,8 +115,8 @@ protected:
     {
         if( color_changed )
         {
-            shader.setUniform!col4("col1", scol1);
-            shader.setUniform!col4("col2", scol2);
+            shader.setUniform!vec4("col1", scol1);
+            shader.setUniform!vec4("col2", scol2);
             color_changed = false;
         }
 
